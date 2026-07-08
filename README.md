@@ -1,2 +1,2 @@
-# move-game
-Website for desktop game - Move
+# Games
+Website for desktop games from Auduvant Technologies
