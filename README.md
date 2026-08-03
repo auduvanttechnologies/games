@@ -1,2 +1,2 @@
 # Games
-Website for desktop games from Auduvant Technologies
+Website for games from Auduvant Technologies
