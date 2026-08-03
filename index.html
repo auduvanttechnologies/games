@@ -1,1 +1,458 @@
-Hello World!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auduvant Technologies — We make games</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-page: #1C1660;
+    --bg-card: #34299E;
+    --bg-card-2: #2A2189;
+    --bg-black: #12102E;
+    --teal: #1FC8A9;
+    --coral: #FF6F59;
+    --yellow: #FFD166;
+    --pink: #FF9EC4;
+    --white: #FFFFFF;
+    --muted: rgba(255,255,255,0.65);
+    --faint: rgba(255,255,255,0.12);
+  }
+  *{ box-sizing: border-box; margin: 0; padding: 0; }
+  html{ scroll-behavior: smooth; }
+  body{
+    background: var(--bg-page);
+    color: var(--white);
+    font-family: 'Inter', -apple-system, sans-serif;
+    overflow-x: hidden;
+  }
+  .display{ font-family: 'Baloo 2', sans-serif; font-weight: 700; }
+  a{ color: inherit; text-decoration: none; }
+  .wrap{ max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+
+  .glow{
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ---------- nav ---------- */
+  header{
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(14px);
+    background: rgba(28, 22, 96, 0.75);
+    border-bottom: 1px solid var(--faint);
+  }
+  nav.wrap{
+    display: flex; align-items: center; justify-content: space-between;
+    height: 76px;
+  }
+  .brand{ display: flex; align-items: center; gap: 12px; }
+  .brand-mark{ width: 36px; height: 36px; }
+  .brand-text{ display: flex; flex-direction: column; line-height: 1.1; }
+  .brand-text .company{ font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: 15px; }
+  .brand-text .sub{ font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+  .nav-links{ display: flex; align-items: center; gap: 34px; }
+  .nav-links a{ font-size: 14px; font-weight: 600; color: var(--muted); transition: color 0.15s ease; }
+  .nav-links a:hover{ color: var(--white); }
+
+  .btn{
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: 15px;
+    padding: 13px 26px; border-radius: 999px; border: none; cursor: pointer;
+    transition: transform 0.15s ease, filter 0.15s ease;
+  }
+  .btn:hover{ transform: translateY(-2px); filter: brightness(1.06); }
+  .btn.primary{ background: var(--yellow); color: #3a2b00; }
+  .btn.teal{ background: var(--teal); color: #05332b; }
+  .btn.ghost{ background: transparent; border: 2px solid var(--faint); color: var(--white); }
+  .btn.small{ padding: 10px 20px; font-size: 13px; }
+
+  /* ---------- hero ---------- */
+  .hero{ position: relative; padding: 100px 0 90px; text-align: center; overflow: hidden; }
+  .hero .wrap{ position: relative; z-index: 2; }
+  .eyebrow{
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.08); border: 1px solid var(--faint);
+    padding: 7px 16px; border-radius: 999px; font-size: 12px; font-weight: 700;
+    letter-spacing: 0.8px; text-transform: uppercase; color: var(--teal);
+    margin-bottom: 26px;
+  }
+  .eyebrow .dot{ width: 7px; height: 7px; border-radius: 50%; background: var(--teal); }
+  h1.hero-title{ font-size: 68px; line-height: 1.02; letter-spacing: -1.5px; margin: 0 auto 22px; max-width: 780px; }
+  h1.hero-title .accent{
+    background: linear-gradient(90deg, var(--teal), var(--coral));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero-sub{
+    font-size: 18px; line-height: 1.6; color: var(--muted);
+    max-width: 560px; margin: 0 auto 36px;
+  }
+  .hero-ctas{ display: flex; align-items: center; justify-content: center; gap: 18px; }
+
+  /* ---------- games spotlight (reference-inspired split layout) ---------- */
+  #games{ padding-top: 40px; }
+  .spotlight-label{
+    display: flex; align-items: center; gap: 14px;
+    font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 18px;
+  }
+  .spotlight-label::after{ content:''; flex:1; height:1px; background: var(--faint); }
+
+  .spotlight{
+    background: var(--bg-black);
+    border-radius: 28px;
+    padding: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 10px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .spotlight-heading{
+    font-size: 58px;
+    line-height: 0.94;
+    letter-spacing: -1px;
+  }
+  .spotlight-heading .green{ color: var(--teal); }
+  .spotlight-text{
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 20px 0 28px;
+    max-width: 340px;
+  }
+
+  .spotlight-visual{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 340px;
+  }
+  .spotlight-board-card{
+    background: var(--bg-card);
+    border-radius: 22px;
+    padding: 18px;
+    transform: rotate(-3deg);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+  }
+  .mini-board{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 5px;
+    width: 230px; height: 230px;
+    background: rgba(0,0,0,0.18);
+    padding: 5px;
+    border-radius: 14px;
+  }
+  .mini-cell{ background: rgba(255,255,255,0.06); border-radius: 6px; position: relative; }
+  .mini-x, .mini-o{ width: 60%; height: 60%; position: absolute; top:20%; left:20%; }
+  .mini-x .bar{ position:absolute; top:50%; left:50%; width:100%; height:20%; background: var(--coral); border-radius: 999px; }
+  .mini-x .bar.b1{ transform: translate(-50%,-50%) rotate(45deg); }
+  .mini-x .bar.b2{ transform: translate(-50%,-50%) rotate(-45deg); }
+  .mini-o svg{ width:100%; height:100%; }
+
+  .spotlight-info-card{
+    position: absolute;
+    right: -18px;
+    bottom: -22px;
+    background: var(--teal);
+    color: #05332b;
+    border-radius: 20px;
+    padding: 22px 24px;
+    width: 210px;
+    box-shadow: 0 20px 44px rgba(0,0,0,0.4);
+  }
+  .spotlight-info-card .tag{
+    font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;
+    opacity: 0.75; margin-bottom: 8px;
+  }
+  .spotlight-info-card h4{ font-family: 'Baloo 2', sans-serif; font-size: 20px; margin-bottom: 10px; }
+  .spotlight-info-card a{
+    font-size: 13px; font-weight: 700;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+
+  .more-games-note{
+    text-align: center;
+    margin-top: 26px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  /* ---------- studio pillars ---------- */
+  section{ position: relative; padding: 90px 0; }
+  .section-head{ text-align: center; max-width: 620px; margin: 0 auto 56px; }
+  .section-eyebrow{
+    font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+    color: var(--coral); margin-bottom: 12px;
+  }
+  h2.section-title{ font-size: 40px; letter-spacing: -0.5px; margin-bottom: 14px; }
+  .section-sub{ color: var(--muted); font-size: 16px; line-height: 1.6; }
+
+  .pillars{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .pillar{
+    background: var(--bg-card);
+    border-radius: 22px;
+    padding: 32px 26px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .pillar .num{
+    font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 13px;
+    color: var(--yellow); letter-spacing: 1px; margin-bottom: 16px;
+  }
+  .pillar h3{ font-family: 'Baloo 2', sans-serif; font-size: 19px; margin-bottom: 10px; }
+  .pillar p{ color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+  /* ---------- updates / blog ---------- */
+  .updates-heading{ font-size: 52px; line-height: 0.96; letter-spacing: -1px; margin-bottom: 10px; }
+  .updates-heading .green{ color: var(--teal); }
+  .updates-head-row{
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 42px; gap: 20px; flex-wrap: wrap;
+  }
+  .updates-grid{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .update-card{
+    background: var(--bg-card);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: transform 0.2s ease;
+  }
+  .update-card:hover{ transform: translateY(-4px); }
+  .update-thumb{
+    height: 120px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 34px;
+  }
+  .update-body{ padding: 22px; }
+  .update-meta{
+    font-size: 12px; color: var(--muted); margin-bottom: 10px;
+    display: flex; gap: 10px;
+  }
+  .update-body h4{ font-family: 'Baloo 2', sans-serif; font-size: 16px; line-height: 1.35; margin-bottom: 10px; }
+  .update-body a{ font-size: 13px; font-weight: 700; color: var(--teal); }
+
+  /* ---------- CTA banner ---------- */
+  .cta-banner{
+    background: linear-gradient(135deg, var(--bg-card) 0%, #402fc9 100%);
+    border-radius: 32px; padding: 64px 48px; text-align: center;
+    position: relative; overflow: hidden; margin: 0 32px;
+  }
+  .cta-banner h2{ font-size: 38px; margin-bottom: 14px; letter-spacing: -0.5px; }
+  .cta-banner p{ color: var(--muted); font-size: 16px; margin-bottom: 32px; }
+
+  /* ---------- footer ---------- */
+  footer{ border-top: 1px solid var(--faint); padding: 48px 0 36px; }
+  footer .wrap{ display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+  .footer-links{ display: flex; gap: 26px; }
+  .footer-links a{ font-size: 13px; color: var(--muted); font-weight: 600; }
+  .footer-links a:hover{ color: var(--white); }
+  .footer-copy{ font-size: 12px; color: var(--muted); }
+
+  @media (max-width: 900px){
+    .nav-links{ display: none; }
+    h1.hero-title{ font-size: 42px; }
+    .spotlight{ grid-template-columns: 1fr; padding: 32px; }
+    .spotlight-heading{ font-size: 42px; }
+    .spotlight-visual{ margin-top: 20px; }
+    .pillars{ grid-template-columns: 1fr; }
+    .updates-grid{ grid-template-columns: 1fr; }
+    .updates-heading{ font-size: 38px; }
+    .cta-banner{ margin: 0 16px; padding: 48px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="80" cy="125" r="46" fill="#1FC8A9"/>
+        <circle cx="80" cy="125" r="24" fill="#1C1660"/>
+        <g transform="rotate(45 128 78)"><rect x="103" y="33" width="26" height="90" rx="13" fill="#FF6F59"/></g>
+        <g transform="rotate(-45 128 78)"><rect x="103" y="33" width="26" height="90" rx="13" fill="#FF6F59"/></g>
+      </svg>
+      <div class="brand-text">
+        <span class="company">Auduvant Technologies</span>
+        <span class="sub">Technology</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#games">Games</a>
+      <a href="#about">Company</a>
+      <a href="#updates">Updates</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="https://www.auduvanttechnologies.com/move-landing-page.html" class="btn primary small">Play Move</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="glow" style="width:560px;height:560px;background:#1FC8A9;top:-220px;left:50%;transform:translateX(-50%);"></div>
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>Auduvant Technologies</div>
+    <h1 class="hero-title display">We build technology.<br><span class="accent">We just happen to make games.</span></h1>
+    <p class="hero-sub">Games are one of the things we build — designed with the same care as everything else we ship: simple, sharply-made, worth coming back to.</p>
+    <div class="hero-ctas">
+      <a href="#games" class="btn primary">See our games</a>
+      <a href="#about" class="btn ghost">About us</a>
+    </div>
+  </div>
+</section>
+
+<section id="games">
+  <div class="wrap">
+    <div class="spotlight-label">Flagship release</div>
+    <div class="spotlight">
+      <div class="glow" style="width:300px;height:300px;background:#FF6F59;bottom:-140px;left:-100px;opacity:0.25;"></div>
+      <div>
+        <h2 class="spotlight-heading display">OUR<br><span class="green">GAMES</span></h2>
+        <p class="spotlight-text">Move is our first release — a five-by-five twist on classic strategy, where every completed run of three scores, and overlaps count separately. Free to play, right in your browser.</p>
+        <a href="https://www.auduvanttechnologies.com/move-landing-page.html" class="btn teal">Explore Move &rarr;</a>
+      </div>
+      <div class="spotlight-visual">
+        <div class="spotlight-board-card">
+          <div class="mini-board" id="miniBoard"></div>
+        </div>
+        <div class="spotlight-info-card">
+          <div class="tag">Now playing</div>
+          <h4 class="display">Move</h4>
+          <a href="https://www.auduvanttechnologies.com/move-landing-page.html">Play Now &rarr;</a>
+        </div>
+      </div>
+    </div>
+    <p class="more-games-note">More titles are in development. This section will grow as our catalog does.</p>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">About Us</div>
+      <h2 class="section-title display">How we build</h2>
+      <p class="section-sub">A few principles guide everything we ship — games included.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="num display">01</div>
+        <h3>Simple and elegant</h3>
+        <p>We'd rather a game be easy to learn and hard to put down than complicated for its own sake.</p>
+      </div>
+      <div class="pillar">
+        <div class="num display">02</div>
+        <h3>Visually satisfying</h3>
+        <p>Every completed move should feel good — clean animation and feedback, without unnecessary noise.</p>
+      </div>
+      <div class="pillar">
+        <div class="num display">03</div>
+        <h3>Built to replay</h3>
+        <p>Good games hold up on the tenth play, not just the first. We design for the long game.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="updates">
+  <div class="wrap">
+    <div class="updates-head-row">
+      <div>
+        <div class="section-eyebrow">From the team</div>
+        <h2 class="updates-heading display">LATEST<br><span class="green">UPDATES</span></h2>
+      </div>
+      <a href="#" class="btn ghost small">View all &rarr;</a>
+    </div>
+    <div class="updates-grid">
+      <div class="update-card">
+        <div class="update-thumb" style="background:linear-gradient(135deg,#1FC8A9,#0f7d69);">🎯</div>
+        <div class="update-body">
+          <div class="update-meta"><span>Dev Log</span><span>&middot;</span><span>3 min read</span></div>
+          <h4>Why we ditched the 3&times;3 grid for Move</h4>
+          <a href="#">Read more &rarr;</a>
+        </div>
+      </div>
+      <div class="update-card">
+        <div class="update-thumb" style="background:linear-gradient(135deg,#FF6F59,#c94a37);">🧠</div>
+        <div class="update-body">
+          <div class="update-meta"><span>Dev Log</span><span>&middot;</span><span>4 min read</span></div>
+          <h4>Building an AI that actually plans ahead</h4>
+          <a href="#">Read more &rarr;</a>
+        </div>
+      </div>
+      <div class="update-card">
+        <div class="update-thumb" style="background:linear-gradient(135deg,#FFD166,#c99a2e);">🚀</div>
+        <div class="update-body">
+          <div class="update-meta"><span>Company</span><span>&middot;</span><span>2 min read</span></div>
+          <h4>What's next for Auduvant Technologies</h4>
+          <a href="#">Read more &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="cta-banner">
+      <div class="glow" style="width:380px;height:380px;background:#FFD166;top:-140px;left:40%;opacity:0.25;"></div>
+      <h2 class="display">Want to try our first game?</h2>
+      <p>Move is free to play, right now, in your browser.</p>
+      <a href="https://www.auduvanttechnologies.com/move-landing-page.html" class="btn primary">Play Move &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width:26px;height:26px;">
+        <circle cx="80" cy="125" r="46" fill="#1FC8A9"/>
+        <circle cx="80" cy="125" r="24" fill="#1C1660"/>
+        <g transform="rotate(45 128 78)"><rect x="103" y="33" width="26" height="90" rx="13" fill="#FF6F59"/></g>
+        <g transform="rotate(-45 128 78)"><rect x="103" y="33" width="26" height="90" rx="13" fill="#FF6F59"/></g>
+      </svg>
+      <span class="footer-copy">&copy; 2026 Auduvant Technologies. All games are the property of Auduvant Technologies.</span>
+    </div>
+    <div class="footer-links">
+      <a href="#games">Games</a>
+      <a href="#about">Company</a>
+      <a href="#updates">Updates</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const miniLayout = [
+    [1,1,1,0,0],
+    [0,2,0,2,0],
+    [0,0,2,0,1],
+    [2,0,0,1,0],
+    [0,1,0,0,0]
+  ];
+  const boardEl = document.getElementById('miniBoard');
+  for(let r=0;r<5;r++){
+    for(let c=0;c<5;c++){
+      const cell = document.createElement('div');
+      cell.className = 'mini-cell';
+      const val = miniLayout[r][c];
+      if(val === 1){
+        cell.innerHTML = '<div class="mini-x"><div class="bar b1"></div><div class="bar b2"></div></div>';
+      } else if(val === 2){
+        cell.innerHTML = '<div class="mini-o"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="none" stroke="#1FC8A9" stroke-width="16"/></svg></div>';
+      }
+      boardEl.appendChild(cell);
+    }
+  }
+</script>
+
+</body>
+</html>
