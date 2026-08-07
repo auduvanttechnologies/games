@@ -115,6 +115,45 @@
     position: relative;
     overflow: hidden;
   }
+
+  .spotlight-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+
+  .game-card{
+    background: var(--bg-black);
+    border-radius: 28px;
+    padding: 38px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .game-card .spotlight-heading{
+    font-size: 48px;
+  }
+  
+  .game-card .spotlight-text{
+    max-width: none;
+  }
+  
+  .game-card .game-card-tag{
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--teal);
+    margin-bottom: 14px;
+  }
+  
+  @media (max-width: 900px){
+    .spotlight-grid{
+      grid-template-columns: 1fr;
+    }
+  }
+  
   .spotlight-heading{
     font-size: 58px;
     line-height: 0.94;
@@ -312,22 +351,32 @@
 
 <section id="games">
   <div class="wrap">
-    <div class="spotlight-label">Flagship release</div>
-    <div class="spotlight">
-      <div class="glow" style="width:300px;height:300px;background:#FF6F59;bottom:-140px;left:-100px;opacity:0.25;"></div>
-      <div>
-        <h2 class="spotlight-heading display">OUR<br><span class="green">GAMES</span></h2>
-        <p class="spotlight-text">Move is our first release — a five-by-five twist on classic strategy, where every completed run of three scores, and overlaps count separately. Free to play, right in your browser.</p>
-        <a href="https://www.auduvanttechnologies.com/games/move-landing-page.html" class="btn teal">Explore Move &rarr;</a>
-      </div>
-      <div class="spotlight-visual">
-        <div class="spotlight-board-card">
-          <div class="mini-board" id="miniBoard"></div>
+    <div class="spotlight-label">2026 releases</div>
+      <div class="spotlight-grid">
+      
+        <!-- MOVE -->
+        <div class="game-card">
+          <div class="glow" style="width:300px;height:300px;background:#FF6F59;bottom:-140px;left:-100px;opacity:0.25;"></div>
+          <div class="game-card-tag">2026 · Available Now</div>
+          <h2 class="spotlight-heading display">MOVE<br><span class="green">5×5</span></h2>
+          <p class="spotlight-text">
+            A five-by-five twist on classic strategy, where every completed run
+            of three scores, and overlaps count separately.
+          </p>
+          <a href="https://www.auduvanttechnologies.com/games/move-landing-page.html" class="btn teal">Explore Move &rarr;</a>
         </div>
-        <div class="spotlight-info-card">
-          <div class="tag">Now playing</div>
-          <h4 class="display">Move</h4>
-          <a href="https://www.auduvanttechnologies.com/games/move-landing-page.html">Play Now &rarr;</a>
+      
+        <!-- shipE -->
+        <div class="game-card">
+          <div class="glow" style="width:300px;height:300px;background:#1FC8A9;top:-140px;right:-100px;opacity:0.25;"></div>
+          <div class="game-card-tag">2026 · In Development</div>
+          <h2 class="spotlight-heading display">ship<span class="green">E</span></h2>
+          <p class="spotlight-text">
+            Choose your path, make your decisions, and see where the road takes you.
+            shipE is an interactive game about entrepreneurship, choices, and consequences.
+          </p>
+          <a href="https://www.auduvanttechnologies.com/shipE/"
+             class="btn teal">Explore shipE &rarr;</a>
         </div>
       </div>
     </div>
