@@ -95,8 +95,8 @@
   }
   .hero-ctas{ display: flex; align-items: center; justify-content: center; gap: 18px; }
 
-  /* ---------- games spotlight (reference-inspired split layout) ---------- */
-  #games{ padding-top: 40px; }
+  /* ---------- releases(games) spotlight (reference-inspired split layout) ---------- */
+  #releases{ padding-top: 40px; }
   .spotlight-label{
     display: flex; align-items: center; gap: 14px;
     font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
@@ -122,7 +122,7 @@
     gap: 22px;
   }
 
-  .game-card{
+  .releases-card{
     background: var(--bg-black);
     border-radius: 28px;
     padding: 38px;
@@ -130,15 +130,15 @@
     overflow: hidden;
   }
   
-  .game-card .spotlight-heading{
+  .releases-card .spotlight-heading{
     font-size: 48px;
   }
   
-  .game-card .spotlight-text{
+  .releases-card .spotlight-text{
     max-width: none;
   }
   
-  .game-card .game-card-tag{
+  .releases-card .game-card-tag{
     display: inline-block;
     font-size: 11px;
     font-weight: 700;
@@ -220,7 +220,7 @@
     display: inline-flex; align-items: center; gap: 6px;
   }
 
-  .more-games-note{
+  .more-releases-note{
     text-align: center;
     margin-top: 26px;
     color: var(--muted);
@@ -327,12 +327,12 @@
       </div>
     </div>
     <div class="nav-links">
-      <a href="#games">Games</a>
-      <a href="#about">Company</a>
+      <a href="#releases">Releases</a>
+      <a href="https://www.auduvanttechnologies.com/">Company</a>
       <a href="#updates">Updates</a>
       <a href="#contact">Contact</a>
     </div>
-    <a href="https://www.auduvanttechnologies.com/games/move-landing-page.html" class="btn primary small">Play Move</a>
+    <a href="https://www.auduvanttechnologies.com/games/muuuve-landing-page.html" class="btn primary small">Play Muuuve</a>
   </nav>
 </header>
 
@@ -340,36 +340,36 @@
   <div class="glow" style="width:560px;height:560px;background:#1FC8A9;top:-220px;left:50%;transform:translateX(-50%);"></div>
   <div class="wrap">
     <div class="eyebrow"><span class="dot"></span>Auduvant Technologies</div>
-    <h1 class="hero-title display">We build technology.<br><span class="accent">We just happen to make games.</span></h1>
+    <h1 class="hero-title display">We build technology.<br><span class="accent">We also make games.</span></h1>
     <p class="hero-sub">Games are one of the things we build — designed with the same care as everything else we ship: simple, sharply-made, worth coming back to.</p>
     <div class="hero-ctas">
-      <a href="#games" class="btn primary">See our games</a>
-      <a href="#about" class="btn ghost">About us</a>
+      <a href="#releases" class="btn primary">See our games</a>
+      <a href="https://www.auduvanttechnologies.com" class="btn ghost">About us</a>
     </div>
   </div>
 </section>
 
-<section id="games">
+<section id="releases">
   <div class="wrap">
     <div class="spotlight-label">2026 releases</div>
       <div class="spotlight-grid">
       
-        <!-- MOVE -->
-        <div class="game-card">
+        <!-- MUUUVE -->
+        <div class="releases-card">
           <div class="glow" style="width:300px;height:300px;background:#FF6F59;bottom:-140px;left:-100px;opacity:0.25;"></div>
-          <div class="game-card-tag">2026 · Available Now</div>
-          <h2 class="spotlight-heading display">MOVE<br><span class="green">5×5</span></h2>
+          <div class="releases-card-tag">2026 · Available Now</div>
+          <h2 class="spotlight-heading display">MUUUVE<br><span class="green">5×5</span></h2>
           <p class="spotlight-text">
             A five-by-five twist on classic strategy, where every completed run
             of three scores, and overlaps count separately.
           </p>
-          <a href="https://www.auduvanttechnologies.com/games/move-landing-page.html" class="btn teal">Explore Move &rarr;</a>
+          <a href="https://www.auduvanttechnologies.com/games/muuuve-landing-page.html" class="btn teal">Explore Muuuve &rarr;</a>
         </div>
       
         <!-- shipE -->
-        <div class="game-card">
+        <div class="releases-card">
           <div class="glow" style="width:300px;height:300px;background:#1FC8A9;top:-140px;right:-100px;opacity:0.25;"></div>
-          <div class="game-card-tag">2026 · In Development</div>
+          <div class="releases-card-tag">2026 · In Development</div>
           <h2 class="spotlight-heading display">ship<span class="green">E</span></h2>
           <p class="spotlight-text">
             Choose your path, make your decisions, and see where the road takes you.
@@ -381,33 +381,6 @@
       </div>
     </div>
     <p class="more-games-note">More titles are in development. This section will grow as our catalog does.</p>
-  </div>
-</section>
-
-<section id="about">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="section-eyebrow">About Us</div>
-      <h2 class="section-title display">How we build</h2>
-      <p class="section-sub">A few principles guide everything we ship — games included.</p>
-    </div>
-    <div class="pillars">
-      <div class="pillar">
-        <div class="num display">01</div>
-        <h3>Simple and elegant</h3>
-        <p>We'd rather a game be easy to learn and hard to put down than complicated for its own sake.</p>
-      </div>
-      <div class="pillar">
-        <div class="num display">02</div>
-        <h3>Visually satisfying</h3>
-        <p>Every completed move should feel good — clean animation and feedback, without unnecessary noise.</p>
-      </div>
-      <div class="pillar">
-        <div class="num display">03</div>
-        <h3>Built to replay</h3>
-        <p>Good games hold up on the tenth play, not just the first. We design for the long game.</p>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -425,7 +398,7 @@
         <div class="update-thumb" style="background:linear-gradient(135deg,#1FC8A9,#0f7d69);">🎯</div>
         <div class="update-body">
           <div class="update-meta"><span>Dev Log</span><span>&middot;</span><span>3 min read</span></div>
-          <h4>Why we ditched the 3&times;3 grid for Move</h4>
+          <h4>Why we ditched the 3&times;3 grid for Muuuve</h4>
           <a href="#">Read more &rarr;</a>
         </div>
       </div>
@@ -454,8 +427,8 @@
     <div class="cta-banner">
       <div class="glow" style="width:380px;height:380px;background:#FFD166;top:-140px;left:40%;opacity:0.25;"></div>
       <h2 class="display">Want to try our first game?</h2>
-      <p>Move is free to play, right now, in your browser.</p>
-      <a href="https://www.auduvanttechnologies.com/games/move-landing-page.html" class="btn primary">Play Move &rarr;</a>
+      <p>Muuuve is free to play, right now, in your browser.</p>
+      <a href="https://www.auduvanttechnologies.com/games/muuuve-landing-page.html" class="btn primary">Play Move &rarr;</a>
     </div>
   </div>
 </section>
@@ -472,8 +445,8 @@
       <span class="footer-copy">&copy; 2026 Auduvant Technologies. All games are the property of Auduvant Technologies.</span>
     </div>
     <div class="footer-links">
-      <a href="#games">Games</a>
-      <a href="#about">Company</a>
+      <a href="#releases">Releases</a>
+      <a href="https://www.auduvanttechnologies.com">Company</a>
       <a href="#updates">Updates</a>
     </div>
   </div>
