@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Play shipE</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --night: #24163F;
+    --night-2: #301E52;
+    --card: #3A2763;
+    --cream: #FFF7DE;
+    --muted: #CFC3E8;
+    --gold: #E5B84A;
+    --candy: #FF7AA8;
+    --forest: #4FD1A5;
+    --danger: #FF7A7A;
+    --radius: 18px;
+    --display: "Baloo 2", "Trebuchet MS", sans-serif;
+    --body: "Nunito", "Segoe UI", sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--night);
+    color: var(--cream);
+    font-family: var(--body);
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  a { color: var(--gold); }
+  a:focus-visible, button:focus-visible, summary:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 3px;
+    border-radius: 8px;
+  }
+
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 22px; }
+
+  /* ---------- hero: the fork ---------- */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding: 64px 0 72px;
+    text-align: center;
+    background:
+      linear-gradient(100deg, rgba(255,122,168,0.28) 0%, rgba(36,22,63,0) 38%, rgba(36,22,63,0) 62%, rgba(79,209,165,0.24) 100%),
+      var(--night);
+  }
+  .hero h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(2.6rem, 8vw, 4.6rem);
+    line-height: 1.05;
+    margin: 0 0 14px;
+  }
+  .hero h1 b { color: var(--gold); font-weight: 800; }
+  .hero p { max-width: 560px; margin: 0 auto 28px; color: var(--muted); font-size: 1.15rem; }
+
+  .btn {
+    display: inline-block;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 1.2rem;
+    padding: 12px 30px;
+    border-radius: 999px;
+    border: 0;
+    background: var(--gold);
+    color: var(--night);
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.ghost { background: transparent; color: var(--cream); border: 2px solid var(--muted); }
+
+  .jump { margin-top: 22px; font-size: 0.95rem; color: var(--muted); }
+
+  /* ---------- sections ---------- */
+  section { padding: 44px 0; border-top: 1px solid rgba(255,247,222,0.12); }
+  h2 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(1.6rem, 4vw, 2.1rem);
+    margin: 0 0 6px;
+  }
+  .lead { color: var(--muted); margin: 0 0 24px; max-width: 620px; }
+  h3 { font-family: var(--display); font-size: 1.25rem; margin: 0 0 4px; }
+  p { margin: 0 0 12px; }
+
+  /* ---------- the loop (a real sequence, so it is numbered) ---------- */
+  .loop { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; counter-reset: step; }
+  .loop li {
+    counter-increment: step;
+    position: relative;
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 18px 20px 18px 68px;
+  }
+  .loop li::before {
+    content: counter(step);
+    position: absolute;
+    left: 18px; top: 16px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--gold);
+    color: var(--night);
+    font-family: var(--display);
+    font-weight: 800;
+  }
+  .loop p { margin: 0; color: var(--muted); }
+
+  /* ---------- table ---------- */
+  .scroll { overflow-x: auto; border-radius: var(--radius); background: var(--card); }
+  table { width: 100%; border-collapse: collapse; min-width: 560px; }
+  th, td { text-align: left; padding: 12px 16px; vertical-align: top; }
+  th { font-family: var(--display); color: var(--gold); font-weight: 600; border-bottom: 2px solid rgba(255,247,222,0.18); }
+  td { border-bottom: 1px solid rgba(255,247,222,0.08); }
+  tr:last-child td { border-bottom: 0; }
+  td:first-child { font-weight: 800; white-space: nowrap; }
+  .num { white-space: nowrap; }
+
+  /* ---------- glossary ---------- */
+  dl { margin: 0; display: grid; gap: 12px; }
+  .term { background: var(--card); border-radius: var(--radius); padding: 14px 18px; }
+  dt { font-family: var(--display); font-weight: 800; font-size: 1.1rem; }
+  dd { margin: 2px 0 0; color: var(--muted); }
+
+  /* ---------- timeline: the memorable bit ---------- */
+  .years { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; margin-bottom: 14px; }
+  .years button {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 1.1rem;
+    padding: 10px 0;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    background: var(--card);
+    color: var(--cream);
+    cursor: pointer;
+  }
+  .years button[aria-selected="true"] { background: var(--gold); color: var(--night); }
+  .year-panel { background: var(--card); border-radius: var(--radius); padding: 20px 22px; min-height: 150px; }
+  .year-panel h3 { font-size: 1.4rem; }
+  .year-panel .tag { color: var(--forest); font-weight: 800; margin-bottom: 8px; }
+
+  /* ---------- callouts ---------- */
+  .callout {
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    border-left: 6px solid var(--danger);
+    background: rgba(255,122,122,0.12);
+  }
+  .callout + .callout { margin-top: 14px; }
+  .callout.good { border-left-color: var(--forest); background: rgba(79,209,165,0.12); }
+
+  ul.tips { padding-left: 22px; margin: 0; }
+  ul.tips li { margin-bottom: 10px; }
+
+  details { background: var(--card); border-radius: var(--radius); padding: 14px 20px; margin-bottom: 12px; }
+  summary { cursor: pointer; font-family: var(--display); font-weight: 800; font-size: 1.15rem; }
+  details p { margin: 10px 0 0; color: var(--muted); }
+
+  footer { padding: 36px 0 56px; text-align: center; color: var(--muted); font-size: 0.95rem; border-top: 1px solid rgba(255,247,222,0.12); }
+
+  @media (max-width: 560px) {
+    .years { grid-template-columns: repeat(5, 1fr); }
+    .loop li { padding-left: 62px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .btn { transition: none; }
+  }
+</style>
+</head>
+
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Build a company.<br>Beat the <b>computer.</b></h1>
+    <p>In Level 3 you get $100,000, a cofounder, and ten years. Make smart choices, survive the surprises, and finish with a more valuable company than your rival.</p>
+    <a class="btn" href="index.html">Play now</a>
+    <p class="jump">Want the details first? <a href="#loop">See how a year works</a></p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section id="loop">
+    <h2>How a year works</h2>
+    <p class="lead">The game lasts ten years. Every year follows the same loop.</p>
+
+    <ol class="loop">
+      <li>
+        <h3>Check your company</h3>
+        <p>The left panel shows your cash, revenue, users, market share, reputation, and runway. The right panel shows the computer's value and your rank.</p>
+      </li>
+      <li>
+        <h3>Take up to 3 actions</h3>
+        <p>Pick from the action cards. Each costs cash and gives you something back. Cards turn grey when you can't afford them or when you're out of actions.</p>
+      </li>
+      <li>
+        <h3>End the year</h3>
+        <p>You have 2 minutes per year. Press <b>End Year Early</b> when you're done, or let the timer run out.</p>
+      </li>
+      <li>
+        <h3>Face the year's event</h3>
+        <p>Every year ends with an event. Most give you a choice, and the buttons show the cost or the odds. Then the year's expenses are paid and the next year begins.</p>
+      </li>
+    </ol>
+
+    <div class="callout good" style="margin-top:18px">
+      <b>How you win:</b> after year 10, the company with the higher value wins. Cash on hand doesn't count toward your score, so spend it wisely, but don't run out.
+    </div>
+  </section>
+
+  <section id="actions">
+    <h2>The action cards</h2>
+    <p class="lead">Costs jump after Year 1 because your Series A makes you a much bigger company.</p>
+
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Card</th><th>What it does</th><th>Year 1</th><th>Year 2+</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Develop Product</td><td>Adds users and revenue, raises value and reputation.</td><td class="num">$25K</td><td class="num">$1.0M</td></tr>
+          <tr><td>Invest in Marketing</td><td>Adds users and market share, raises value.</td><td class="num">$20K</td><td class="num">$800K</td></tr>
+          <tr><td>Expand Operations</td><td>Adds market share and revenue, raises value.</td><td class="num">$35K</td><td class="num">$1.4M</td></tr>
+          <tr><td>Invest in R&amp;D</td><td>The biggest value boost, plus reputation.</td><td class="num">$30K</td><td class="num">$1.2M</td></tr>
+          <tr><td>High Salaries</td><td>Costs reputation and a little value, but a loyal team is harder for rivals to poach.</td><td class="num">$20K</td><td class="num">$800K</td></tr>
+          <tr><td>Personal Spending</td><td>Take 10%, 50%, or 100% of company cash for yourself. Free, but it hurts your reputation and your company's value. You can do it once a year, and it doesn't use up an action.</td><td class="num">Free</td><td class="num">Free</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="stats">
+    <h2>What the numbers mean</h2>
+    <p class="lead">Keep an eye on these. Some are your score, and some keep you alive.</p>
+
+    <dl>
+      <div class="term"><dt>Company value</dt><dd>What your company is worth. This decides who wins.</dd></div>
+      <div class="term"><dt>Cash</dt><dd>Money in the bank. Actions, events, and yearly expenses all draw it down.</dd></div>
+      <div class="term"><dt>Runway</dt><dd>How many months your cash would last at your current burn rate.</dd></div>
+      <div class="term"><dt>Burn rate</dt><dd>The cost of running the company each year, whether or not you take any actions. It starts small and grows a lot after Year 1.</dd></div>
+      <div class="term"><dt>Market share</dt><dd>The slice of your market you own. It slowly boosts your value.</dd></div>
+      <div class="term"><dt>Reputation</dt><dd>A 0 to 100 score. Higher means a small boost to value each year, and bigger funding rounds. Lower means the opposite.</dd></div>
+      <div class="term"><dt>Dilution</dt><dd>When you sell part of your company to investors, everyone who already owned shares owns a smaller percentage. You get cash, but you own less.</dd></div>
+    </dl>
+  </section>
+
+  <section id="timeline">
+    <h2>What's coming</h2>
+    <p class="lead">Pick a year to see the concept it teaches. The outcomes are up to you.</p>
+
+    <div class="years" role="tablist" aria-label="Years">
+      <button role="tab" aria-selected="true" data-y="0">1</button>
+      <button role="tab" aria-selected="false" data-y="1">2</button>
+      <button role="tab" aria-selected="false" data-y="2">3</button>
+      <button role="tab" aria-selected="false" data-y="3">4</button>
+      <button role="tab" aria-selected="false" data-y="4">5</button>
+      <button role="tab" aria-selected="false" data-y="5">6</button>
+      <button role="tab" aria-selected="false" data-y="6">7</button>
+      <button role="tab" aria-selected="false" data-y="7">8</button>
+      <button role="tab" aria-selected="false" data-y="8">9</button>
+      <button role="tab" aria-selected="false" data-y="9">10</button>
+    </div>
+
+    <div class="year-panel" id="yearPanel" role="tabpanel" aria-live="polite"></div>
+  </section>
+
+  <section id="danger">
+    <h2>What can end your run</h2>
+
+    <div class="callout">
+      <b>Bankruptcy.</b> If your cash is negative at the end of two years in a row, creditors take over and the game ends. One bad year is a warning, so fix it quickly.
+    </div>
+    <div class="callout">
+      <b>Treating investor money like your own.</b> Personal spending is tempting, but your company remembers. It lowers your reputation now, and it can come back to hurt you years later.
+    </div>
+  </section>
+
+  <section id="tips">
+    <h2>Tips</h2>
+    <ul class="tips">
+      <li>Use all 3 actions most years. Investors reward momentum, and an idle year makes your next funding round smaller.</li>
+      <li>Check your runway before you spend. It's better to skip a card than to go negative.</li>
+      <li>Read the little hint under each event choice. It tells you what the choice costs or how risky it is.</li>
+      <li>Some choices help now and hurt later, and some do the opposite. Think about what could come up in the next few years.</li>
+      <li>The computer grows every year too, so standing still means falling behind.</li>
+    </ul>
+  </section>
+
+  <section id="levels12">
+    <h2>Levels 1 and 2</h2>
+    <p class="lead">These levels are about the road you choose.</p>
+
+    <details>
+      <summary>The fork in the road</summary>
+      <p>Answer the first question correctly to take the candy road. Get it wrong and you take the storm forest. Both roads are playable.</p>
+    </details>
+    <details>
+      <summary>Candyland</summary>
+      <p>Drag from each question to its matching answer. Right matches earn shields. Wrong ones cost health. Then answer questions to escape the quicksand.</p>
+    </details>
+    <details>
+      <summary>The dark forest</summary>
+      <p>Switch lanes with the up and down arrows to dodge thorns, answer questions to unlock Super Punch and Super Kick, then face the Skeleton King. Wait for the wind, then punch (Z) or kick (X) to block it, and attack in between.</p>
+    </details>
+    <details>
+      <summary>Health</summary>
+      <p>Your health bar starts full. Wrong answers cost health, and if it runs out you're out of the level.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><a class="btn" href="index.html">Start playing</a></p>
+    <p><a href="privacy.html">Privacy Policy</a></p>
+  </div>
+</footer>
+
+<script>
+  const YEARS = [
+    { t: "Pre-seed and Demo Day", c: "Pre-seed funding is the earliest money a startup raises, used to build a first product and test whether anyone wants it.", e: "You'll pitch to investors at Demo Day. Bold or safe?" },
+    { t: "Series A", c: "A Series A is the first big venture round. You get much more cash, but investors take a share of your company.", e: "Your cofounder makes a very expensive decision. You choose what happens next." },
+    { t: "Growth and market share", c: "Growing companies spend to win customers. Press, grants, and traction change how investors see you.", e: "Good news arrives, and you choose how to use it." },
+    { t: "Keeping your team", c: "Employees are often a startup's biggest cost and biggest asset. Pay, equity, and culture decide who stays.", e: "A rival tries to take one of your key people." },
+    { t: "Industry risk", c: "Every industry has its own regulations, supply chains, and technology gambles.", e: "A curveball hits your specific industry. Each of the ten industries gets its own." },
+    { t: "Strategic investors", c: "A strategic investor is a company that invests for business reasons, not only for money. Offers to buy you show what the market thinks you're worth.", e: "A competitor makes you an offer." },
+    { t: "Going public", c: "An IPO sells shares to the public. It raises cash and prestige, but adds scrutiny and market swings.", e: "The IPO window opens. Do you jump through?" },
+    { t: "Recessions", c: "Recessions cut spending and tighten capital. Cash reserves and a low burn rate help companies survive.", e: "The economy turns. You decide how to respond." },
+    { t: "Audits and compliance", c: "Company records must be accurate. Mixing company money with personal spending can lead to penalties.", e: "The IRS comes knocking. How you've played so far matters." },
+    { t: "The final stretch", c: "Valuation can swing sharply with customers, growth, and market mood.", e: "Customers are leaving. How do you finish?" }
+  ];
+
+  const tabs = document.querySelectorAll(".years button");
+  const panel = document.getElementById("yearPanel");
+
+  function showYear(i) {
+    const y = YEARS[i];
+    tabs.forEach((b, n) => b.setAttribute("aria-selected", n === i ? "true" : "false"));
+    panel.innerHTML = "";
+
+    const tag = document.createElement("p");
+    tag.className = "tag";
+    tag.textContent = "Year " + (i + 1);
+
+    const h = document.createElement("h3");
+    h.textContent = y.t;
+
+    const concept = document.createElement("p");
+    concept.textContent = y.c;
+
+    const event = document.createElement("p");
+    const strong = document.createElement("b");
+    strong.textContent = "This year's event: ";
+    event.appendChild(strong);
+    event.appendChild(document.createTextNode(y.e));
+
+    panel.append(tag, h, concept, event);
+  }
+
+  tabs.forEach((b, i) => b.addEventListener("click", () => showYear(i)));
+  showYear(0);
+</script>
+
+</body>
+</html>
